@@ -46,6 +46,13 @@
   box-sizing: border-box;
 }
 
+/* Bonne réponse affichée après une erreur, en texte normal pour l'apprendre */
+.correction {
+  margin: 0;
+  min-height: 1.5em;
+  color: var(--text-h);
+}
+
 /* Lumière qui s'allume sur le champ : verte si bon, rouge si mauvais */
 .saisie.ok {
   animation: flash-ok 0.6s ease-out;

@@ -33,6 +33,7 @@ export default function Reading() {
     const [currentWord, setcurrentWord] = useState("");
     const [feedback, setFeedback] = useState("");
     const [error, setError] = useState(0);
+    const [correction, setCorrection] = useState("");
 
     useEffect(() => {
         getRandomWords()
@@ -45,10 +46,18 @@ export default function Reading() {
         return () => clearTimeout(t);
     }, [feedback])
 
+    // Affiche la bonne réponse pendant 1.5s après une erreur
+    useEffect(() => {
+        if (!correction) return;
+        const t = setTimeout(() => setCorrection(""), 1500);
+        return () => clearTimeout(t);
+    }, [correction])
+
 
     function handleError() {
         if (error >= 3) {
             setFeedback("ko")
+            setCorrection(currentWord)
             getRandomWords()
             setInput("")
             setError(0)
@@ -76,6 +85,7 @@ export default function Reading() {
         console.log("gandle res");
         if (input == currentWord) {
             setFeedback("ok")
+            setCorrection("")
             getRandomWords()
             setInput("")
         }else {
@@ -104,6 +114,7 @@ export default function Reading() {
                 }}
             />
             <h5>{error > 0 ? error : ""}</h5>
+            <p className="correction">{correction ? `Réponse : ${correction}` : ""}</p>
         </div>
     )
 }
