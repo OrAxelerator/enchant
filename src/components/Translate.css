@@ -1,0 +1,47 @@
+.translate {
+  width: min(90vw, 480px);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.75rem;
+}
+
+.bulle {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1rem 1.25rem;
+  border-radius: 18px;
+  border: 1px solid var(--magic-dim);
+  background: var(--input-bg);
+  font-size: 1.1rem;
+  text-align: left;
+  box-shadow: inset 0 0 14px rgba(140, 90, 230, 0.2);
+}
+
+.bulle:focus {
+  border-color: var(--magic);
+  box-shadow: inset 0 0 14px rgba(140, 90, 230, 0.35), 0 0 14px rgba(185, 140, 255, 0.25);
+}
+
+/* Sortie : lecture seule, affichée dans la police galactique */
+.bulle-galactic {
+  font-family: var(--mc);
+  font-size: 1.6rem;
+  /* La police donne un espace trop étroit : on l'élargit pour bien séparer les mots */
+  word-spacing: 0.5em;
+  min-height: 3.5rem;
+  color: var(--magic);
+  cursor: default;
+}
+
+.bulle-galactic:focus {
+  border-color: var(--magic-dim);
+  box-shadow: inset 0 0 14px rgba(140, 90, 230, 0.2);
+}
+
+.fleche {
+  color: var(--magic);
+  opacity: 0.7;
+  font-size: 1.5rem;
+  line-height: 1;
+}

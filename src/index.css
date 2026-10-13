@@ -40,9 +40,12 @@ body {
 }
 
 #root {
+  /* svh : hauteur stable même quand la barre d'adresse mobile apparaît ou disparaît */
   min-height: 100vh;
+  min-height: 100svh;
   box-sizing: border-box;
-  padding: 0 1rem 2rem;
+  /* pas de padding latéral : le header doit occuper toute la largeur */
+  padding: 0 0 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;

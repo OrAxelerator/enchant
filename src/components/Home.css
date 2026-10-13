@@ -1,0 +1,194 @@
+/* Palette : violet enchantement, obsidienne noire, touches magenta */
+:root {
+  --obsidian: #0c0914;
+  --magic: #b98cff;
+  --magic-dim: rgba(185, 140, 255, 0.3);
+}
+
+.home {
+  container-type: inline-size;
+  width: min(92vw, 640px);
+  /* prend l'espace restant sous le header (flex dans #root), sans ajouter de hauteur */
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ring {
+  --s: clamp(6rem, 24cqw, 9rem);
+  --r: calc(50cqw - var(--s) / 2 - 4px);
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+}
+
+/* Lueur violette derrière la table */
+.glow {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 90cqw;
+  height: 90cqw;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(140, 90, 230, 0.35) 0%, rgba(140, 90, 230, 0.08) 40%, transparent 70%);
+  animation: glow-pulse 4s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+/* Cercle qui passe par le centre des boutons */
+.ring-orbit {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(var(--r) * 2);
+  height: calc(var(--r) * 2);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px solid var(--magic-dim);
+}
+
+/* Billes qui tournent sur le cercle */
+.orbs {
+  position: absolute;
+  inset: 0;
+  animation: spin 24s linear infinite;
+}
+
+.orb {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  border-radius: 50%;
+  background: var(--magic);
+  box-shadow: 0 0 8px var(--magic);
+  transform: rotate(var(--a)) translateX(var(--r));
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Wrapper carré centré : porte le flottement, l'image agrandie reste centrée dedans.
+   -54.17% = centrage + compensation du contenu de l'image, décalé de ~4% vers le bas */
+.table-wrap {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 38cqw;
+  aspect-ratio: 1;
+  transform: translate(-50%, -54.17%);
+  animation: table-float 4s ease-in-out infinite;
+}
+
+.table {
+  display: block;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 0 16px rgba(140, 90, 230, 0.5));
+  transition: transform 0.3s ease-out;
+  cursor: pointer;
+}
+
+.table:hover {
+  transform: scale(1.12);
+}
+
+/* Lettres galactiques qui montent de l'extérieur vers le centre de la table */
+.particule {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: -0.6em 0 0 -0.4em;
+  font-family: var(--mc);
+  font-size: clamp(1rem, 4cqw, 1.4rem);
+  color: #fff;
+  opacity: 0;
+  pointer-events: none;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.6);
+  transform: rotate(var(--a)) translateX(calc(var(--r) * 1.2)) rotate(calc(var(--a) * -1));
+  animation: particule-vers-centre 1.8s ease-in forwards;
+}
+
+@keyframes particule-vers-centre {
+  0% {
+    opacity: 0;
+    transform: rotate(var(--a)) translateX(calc(var(--r) * 1.2)) rotate(calc(var(--a) * -1));
+  }
+  15% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(var(--a)) translateX(0) rotate(calc(var(--a) * -1));
+  }
+}
+
+@keyframes table-float {
+  0%, 100% { transform: translate(-50%, -54.17%); }
+  50% { transform: translate(-50%, calc(-54.17% - 6px)); }
+}
+
+/* Boutons posés sur le cercle : rotation pour l'angle, contre-rotation pour rester droits */
+.orbit-btn {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--s);
+  height: var(--s);
+  margin: calc(var(--s) / -2) 0 0 calc(var(--s) / -2);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15rem;
+  border-radius: 50%;
+  border: 1px solid var(--magic-dim);
+  background: radial-gradient(circle at 50% 35%, #2a1f42, var(--obsidian) 75%);
+  box-shadow: inset 0 0 14px rgba(140, 90, 230, 0.3);
+  transform: rotate(var(--a)) translateX(var(--r)) rotate(calc(var(--a) * -1));
+  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+}
+
+.orbit-btn:hover,
+.orbit-btn:focus-visible {
+  border-color: var(--magic);
+  box-shadow: inset 0 0 14px rgba(140, 90, 230, 0.5), 0 0 18px rgba(185, 140, 255, 0.4);
+  transform: rotate(var(--a)) translateX(var(--r)) rotate(calc(var(--a) * -1)) scale(1.08);
+}
+
+.orbit-label {
+  font-family: var(--mc);
+  font-size: clamp(0.9rem, 4cqw, 1.1rem);
+  color: var(--text-h);
+  line-height: 1.1;
+}
+
+.orbit-sub {
+  font-size: 0.7rem;
+  color: var(--magic);
+  opacity: 0.85;
+  line-height: 1.1;
+  padding: 0 0.4rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glow, .orbs, .table-wrap { animation: none; }
+  .table { transition: none; }
+  .particule { display: none; }
+  .orbit-btn { transition: none; }
+}

@@ -16,17 +16,51 @@
   gap: 0.75rem;
 }
 
+/* Onglet actif : halo violet */
+.nav button.active {
+  color: var(--text-h);
+  border-color: var(--magic);
+  box-shadow: 0 0 12px rgba(185, 140, 255, 0.55), inset 0 0 10px rgba(140, 90, 230, 0.35);
+}
+
+/* Zone de contenu : centrée verticalement et horizontalement sous le header */
+.page {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
 .writing {
+  position: relative;
   width: min(90vw, 480px);
+  min-height: clamp(18rem, 50svh, 26rem);
   box-sizing: border-box;
   padding: 2rem 1.5rem;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   gap: 1.75rem;
   border: 1px solid var(--border);
   border-radius: 12px;
   background: var(--surface);
+}
+
+/* Erreurs et correction hors du flux : sous la carte, pour que le mot et la saisie restent centrés */
+.retour {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 /* Mot affiché avec la police d'enchantement (alphabet galactique) */
@@ -35,7 +69,8 @@
   font-family: var(--mc);
   font-size: clamp(1.5rem, 5vw, 2.25rem);
   font-weight: 400;
-  line-height: 1.6;
+  /* interligne serré : sinon l'espace vide au-dessus du mot fait paraître le haut trop éloigné */
+  line-height: 1.2;
   letter-spacing: 0.15em;
   color: var(--text-h);
   word-break: break-word;

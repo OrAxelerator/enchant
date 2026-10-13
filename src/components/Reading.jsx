@@ -24,7 +24,7 @@ const MOTS = [
 ]
 
 
-export default function Reading() {
+export default function Reading  () {
 
     const [input, setInput] = useState("");
 
@@ -113,8 +113,10 @@ export default function Reading() {
                     }
                 }}
             />
-            <h5>{error > 0 ? error : ""}</h5>
-            <p className="correction">{correction ? `Réponse : ${correction}` : ""}</p>
+            <div className="retour">
+                <h5>{error > 0 ? error : ""}</h5>
+                <p className="correction">{correction ? `Réponse : ${correction}` : ""}</p>
+            </div>
         </div>
     )
 }
