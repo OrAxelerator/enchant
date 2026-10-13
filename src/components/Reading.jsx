@@ -21,6 +21,22 @@ const MOTS = [
     "protocole", "adresse", "routeur", "pointeur", "parametre", "iteration", "generateur", "decorateur", "exception", "erreur",
     "debogage", "commentaire", "syntaxe", "hachage", "requete", "index", "tuple", "chiffrement", "bit", "cache",
     "retour", "cosinus", "sinus", "tangente", "logarithme", "exponentielle", "modulo", "diviseur", "multiple", "factorielle",
+    "cheval", "vache", "mouton", "cochon", "poule", "canard", "chien", "souris", "loup", "ours",
+    "lion", "tigre", "singe", "poisson", "baleine", "abeille", "papillon", "fourmi", "serpent", "tortue",
+    "cerise", "fraise", "banane", "raisin", "poire", "peche", "tomate", "carotte", "salade", "soupe",
+    "beurre", "sucre", "sel", "poivre", "gateau", "biscuit", "chocolat", "confiture", "assiette", "verre",
+    "couteau", "fourchette", "cuillere", "bouteille", "tasse", "lit", "armoire", "tapis", "lampe", "bougie",
+    "toit", "mur", "escalier", "cave", "grenier", "ecole", "eglise", "hopital", "medecin", "boulanger",
+    "facteur", "pompier", "fermier", "roi", "reine", "prince", "princesse", "chevalier", "sorcier", "geant",
+    "fantome", "lune", "ciel", "terre", "feu", "eau", "herbe", "colline", "vallee", "ile",
+    "falaise", "desert", "champ", "ferme", "moulin", "puits", "barque", "voile", "ancre", "phare",
+    "robe", "manteau", "chaussure", "gant", "echarpe", "ceinture", "poche", "bouton", "aiguille", "fil",
+    // Mots anglais transparents
+    "animal", "hotel", "restaurant", "piano", "radio", "taxi", "police", "important", "possible", "information",
+    "question", "nation", "action", "attention", "direction", "station", "situation", "natural", "central", "normal",
+    "general", "final", "original", "minute", "moment", "document", "president", "accident", "garage", "chocolate",
+    "banana", "tomato", "family", "history", "telephone", "television", "problem", "system", "example", "idea",
+    "color", "center", "theater", "actor", "doctor", "science", "nature", "culture", "adventure", "danger",
 ]
 
 
@@ -62,7 +78,7 @@ export default function Reading  () {
             setInput("")
             setError(0)
         }else {
-            setError(error +1)
+            setError(e => e + 1)
         }
     }
 
@@ -88,6 +104,7 @@ export default function Reading  () {
             setCorrection("")
             getRandomWords()
             setInput("")
+	    setError(0)
         }else {
             setFeedback("ko")
             console.log("raté");
