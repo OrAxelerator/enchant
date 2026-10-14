@@ -76,9 +76,22 @@
   word-break: break-word;
 }
 
-.saisie {
+.saisie-ligne {
   width: 100%;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.saisie {
+  flex: 1;
+  min-width: 0;
   box-sizing: border-box;
+}
+
+.valider {
+  flex-shrink: 0;
+  border-color: var(--magic-dim);
+  color: var(--text-h);
 }
 
 /* Bonne réponse affichée après une erreur, en texte normal pour l'apprendre */

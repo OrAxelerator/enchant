@@ -31,6 +31,11 @@ const MOTS = [
     "fantome", "lune", "ciel", "terre", "feu", "eau", "herbe", "colline", "vallee", "ile",
     "falaise", "desert", "champ", "ferme", "moulin", "puits", "barque", "voile", "ancre", "phare",
     "robe", "manteau", "chaussure", "gant", "echarpe", "ceinture", "poche", "bouton", "aiguille", "fil",
+    "nuageux", "vague", "rocher", "grotte", "caverne", "volcan", "glacier", "marais", "source", "ruisseau",
+    "cristal", "diamant", "rubis", "saphir", "emeraude", "perle", "bijou", "couronne", "sceptre", "bouclier",
+    "armure", "casque", "arc", "fleche", "lance", "hache", "potion", "grimoire", "parchemin", "baguette",
+    "etable", "chariot", "lanterne", "coffre", "tonneau", "corde", "echelle", "marteau", "enclume", "forge",
+    "licorne", "griffon", "sirene", "elfe", "nain", "gobelin", "troll", "vampire", "momie", "squelette",
     // Mots anglais transparents
     "animal", "hotel", "restaurant", "piano", "radio", "taxi", "police", "important", "possible", "information",
     "question", "nation", "action", "attention", "direction", "station", "situation", "natural", "central", "normal",
@@ -39,6 +44,12 @@ const MOTS = [
     "color", "center", "theater", "actor", "doctor", "science", "nature", "culture", "adventure", "danger",
 ]
 
+
+// Comparaison souple : ignore majuscules, accents et espaces autour
+// (l'autocorrecteur du téléphone en rajoute souvent)
+function normaliser(mot) {
+    return mot.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+}
 
 export default function Reading  () {
 
@@ -99,7 +110,7 @@ export default function Reading  () {
 
     function handleResultat() {
         console.log("gandle res");
-        if (input == currentWord) {
+        if (normaliser(input) === normaliser(currentWord)) {
             setFeedback("ok")
             setCorrection("")
             getRandomWords()
@@ -116,20 +127,30 @@ export default function Reading  () {
     return (
         <div className="writing">
             <h3 className="mot">{currentWord}</h3>
-            <input
-                className={`saisie ${feedback}`}
-                value={input}
-                autoFocus
-                autoComplete="off"
-                spellCheck={false}
-                placeholder="tape le mot..."
-                onChange={(e) => handleInput(e)}
-                onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                        handleResultat()
-                    }
+            <form
+                className="saisie-ligne"
+                onSubmit={(e) => {
+                    e.preventDefault()
+                    handleResultat()
                 }}
-            />
+            >
+                <input
+                    className={`saisie ${feedback}`}
+                    value={input}
+                    autoFocus
+                    autoComplete="off"
+                    autoCorrect="off"
+                    autoCapitalize="none"
+                    spellCheck={false}
+                    enterKeyHint="done"
+                    placeholder="tape le mot..."
+                    onChange={(e) => handleInput(e)}
+                />
+                {/* preventDefault au mousedown : le champ garde le focus, le clavier mobile reste ouvert */}
+                <button type="submit" className="valider" onMouseDown={(e) => e.preventDefault()}>
+                    Valider
+                </button>
+            </form>
             <div className="retour">
                 <h5>{error > 0 ? error : ""}</h5>
                 <p className="correction">{correction ? `Réponse : ${correction}` : ""}</p>
