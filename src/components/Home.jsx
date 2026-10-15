@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react'
 
 // Angles en degrés : -90 = haut, 0 = droite, 90 = bas, 180 = gauche
 const LIENS = [
-    { page: 'wiki', label: 'Wiki', sub: 'Wiki', angle: -90 },
-    { page: 'learn', label: 'Apprendre', sub: 'Apprendre', angle: 0 },
-    { page: 'translate', label: 'Traducteur', sub: 'Traducteur', angle: 90 },
-    { page: 'reading', label: 'Entrainement', sub: 'Entraînement', angle: 180 },
+    // 3 portails espacés de 120° : un en haut, deux en bas
+    { page: 'learn', label: 'Apprendre', sub: 'Apprendre', angle: -90 },
+    { page: 'translate', label: 'Traducteur', sub: 'Traducteur', angle: 30 },
+    { page: 'reading', label: 'Entrainement', sub: 'Entraînement', angle: 150 },
 ]
 
 // Petites billes qui tournent sur le cercle

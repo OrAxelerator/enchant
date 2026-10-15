@@ -1,0 +1,50 @@
+/* Carte en haut de la page, à la hauteur de son contenu : texte, image et bouton s'empilent */
+.learn {
+  width: min(94vw, 1100px);
+  height: fit-content;
+  box-sizing: border-box;
+  padding: 2.5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
+  box-shadow: 0 0 24px rgba(140, 90, 230, 0.15);
+  line-height: 1.6;
+  text-align: left;
+}
+
+/* Tableau des lettres : fond clair d'origine, on l'encadre de violet */
+.learn img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--magic-dim);
+  border-radius: 10px;
+  box-shadow: 0 0 14px rgba(185, 140, 255, 0.25);
+}
+
+.learn button {
+  align-self: center;
+  margin-top: 0.5rem;
+  padding: 0.7rem 1.6rem;
+  border-color: var(--magic);
+  color: var(--text-h);
+  box-shadow: 0 0 12px rgba(185, 140, 255, 0.35);
+  transition: color 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.learn button:hover,
+.learn button:focus-visible {
+  border-color: var(--magic);
+  box-shadow: 0 0 20px rgba(185, 140, 255, 0.6), inset 0 0 10px rgba(140, 90, 230, 0.35);
+}
+
+@media (max-width: 640px) {
+  .learn {
+    padding: 1.5rem 1.1rem;
+    gap: 1.1rem;
+  }
+}

@@ -44,6 +44,21 @@ const MOTS = [
     "color", "center", "theater", "actor", "doctor", "science", "nature", "culture", "adventure", "danger",
 ]
 
+const LETTRES = "abcdefghijklmnopqrstuvwxyz"
+
+// Niveau 1 : 1 ou 2 lettres au hasard, niveau 2 : un mot de la liste
+function tirerMot(niveau) {
+    if (niveau === 1) {
+        const longueur = 1 + Math.floor(Math.random() * 2)
+        let mot = ""
+        for (let i = 0; i < longueur; i++) {
+            mot += LETTRES[Math.floor(Math.random() * LETTRES.length)]
+        }
+        return mot
+    }
+    // TODO niveau 3 : pour l'instant, même chose que le niveau 2
+    return MOTS[Math.floor(Math.random() * MOTS.length)]
+}
 
 // Comparaison souple : ignore majuscules, accents et espaces autour
 // (l'autocorrecteur du téléphone en rajoute souvent)
@@ -61,6 +76,7 @@ export default function Reading  () {
     const [feedback, setFeedback] = useState("");
     const [error, setError] = useState(0);
     const [correction, setCorrection] = useState("");
+    const [niveau, setNiveau] = useState(2);
 
     useEffect(() => {
         getRandomWords()
@@ -93,10 +109,17 @@ export default function Reading  () {
         }
     }
 
-    function getRandomWords() {
-        const r = Math.floor((Math.random()* MOTS.length))
-        console.log(r);
-        setcurrentWord(MOTS[r])
+    function getRandomWords(n = niveau) {
+        setcurrentWord(tirerMot(n))
+    }
+
+    // Changer de niveau : nouveau mot et on repart de zéro
+    function changerNiveau(n) {
+        setNiveau(n)
+        getRandomWords(n)
+        setInput("")
+        setError(0)
+        setCorrection("")
     }
 
     function handleInput(e) {
@@ -126,6 +149,19 @@ export default function Reading  () {
 
     return (
         <div className="writing">
+            <div className="niveaux">
+                {[1, 2, 3].map((n) => (
+                    <button
+                        key={n}
+                        type="button"
+                        className={niveau === n ? "active" : ""}
+                        onMouseDown={(e) => e.preventDefault()}
+                        onClick={() => changerNiveau(n)}
+                    >
+                        Niveau {n}
+                    </button>
+                ))}
+            </div>
             <h3 className="mot">{currentWord}</h3>
             <form
                 className="saisie-ligne"

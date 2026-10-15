@@ -39,7 +39,8 @@
   width: min(90vw, 480px);
   min-height: clamp(18rem, 50svh, 26rem);
   box-sizing: border-box;
-  padding: 2rem 1.5rem;
+  /* haut plus grand : place pour les boutons de niveau */
+  padding: 3.5rem 1.5rem 2rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -130,4 +131,26 @@
     border-color: var(--border);
     box-shadow: 0 0 0 rgba(248, 113, 113, 0);
   }
+}
+
+/* Choix de la difficulté, collé en haut de la carte d'entraînement (hors du flux pour que le mot reste centré) */
+.niveaux {
+  position: absolute;
+  top: 0.75rem;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.niveaux button {
+  padding: 0.35rem 0.8rem;
+  font-size: 0.85rem;
+}
+
+.niveaux button.active {
+  color: var(--text-h);
+  border-color: var(--magic);
+  box-shadow: 0 0 10px rgba(185, 140, 255, 0.5);
 }
