@@ -35,7 +35,7 @@ const MOTS = [
     "cristal", "diamant", "rubis", "saphir", "emeraude", "perle", "bijou", "couronne", "sceptre", "bouclier",
     "armure", "casque", "arc", "fleche", "lance", "hache", "potion", "grimoire", "parchemin", "baguette",
     "etable", "chariot", "lanterne", "coffre", "tonneau", "corde", "echelle", "marteau", "enclume", "forge",
-    "licorne", "griffon", "sirene", "elfe", "nain", "gobelin", "troll", "vampire", "momie", "squelette",
+    "licorne", "griffon", "sirene", "elfe", "nain", "gobelin", "troll", "vampire", "momie", "squelette","oraxelerator",
     // Mots anglais transparents
     "animal", "hotel", "restaurant", "piano", "radio", "taxi", "police", "important", "possible", "information",
     "question", "nation", "action", "attention", "direction", "station", "situation", "natural", "central", "normal",

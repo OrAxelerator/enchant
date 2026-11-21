@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import Reading from './components/Reading'
 import Home from './components/Home'
@@ -8,6 +8,30 @@ import Learn from './components/Lean'
 
 function App() {
   const [page, setPage] = useState('home')
+
+  useEffect(() => {
+    function handleKeyDown(event) {
+      const destinations = {
+        '@':'home',
+        '#':'home',
+        '&': 'learn',
+        '1': 'learn',
+        'é': 'translate',
+        '2': 'translate',
+        '"': 'reading',
+        '3': 'reading',
+      }
+      const destination = destinations[event.key]
+
+      if (destination) {
+        event.preventDefault()
+        setPage(destination)
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [])
 
   function displayPage() {
     switch (page) {
